@@ -1,7 +1,7 @@
 resource "aws_subnet" "lab02_web" {
 
   vpc_id                  = aws_vpc.lab02.id
-  cidr_block              = "10.0.20.0/24"
+  cidr_block              = cidrsubnet(aws_vpc.lab02.cidr_block, 8, 20)
   map_public_ip_on_launch = true
 
   tags = {

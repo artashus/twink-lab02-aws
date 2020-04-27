@@ -1,7 +1,7 @@
 resource "aws_subnet" "lab02_db" {
 
   vpc_id     = aws_vpc.lab02.id
-  cidr_block = "10.0.10.0/24"
+  cidr_block = cidrsubnet(aws_vpc.lab02.cidr_block, 8, 10)
 
   tags = {
     Name = "lab02_db"
