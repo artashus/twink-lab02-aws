@@ -6,7 +6,6 @@ bootcmd:
 package_upgrade: true
 
 packages:
-  - nginx
   - mc
   - htop
   - iftop
@@ -31,13 +30,8 @@ runcmd:
   - systemctl disable rpcbind.socket
 
   - cd /
-  - aws s3 cp s3://twink-lab02/cloudconfig/files/base.tar.gz /
+  - aws s3 cp s3://twink-lab02/cloudconfig/base.tar.gz /
   - tar -zxvf base.tar.gz
   - systemctl restart sshd
   - rm -f base.tar.gz
   
-  - rm -f /usr/share/nginx/html/index.html
-  - aws s3 cp s3://twink-lab02/content/index.html /usr/share/nginx/html/
-  - systemctl restart nginx
-  - systemctl enable nginx
-
