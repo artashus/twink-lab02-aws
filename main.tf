@@ -4,7 +4,7 @@ terraform {
 
   backend "s3" {
     bucket = "twink-tfstate"
-    key    = "twink-common.tfstate"
+    key    = "twink-lab02.tfstate"
     region = "us-east-1"
   }
 

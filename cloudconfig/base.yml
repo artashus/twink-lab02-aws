@@ -30,7 +30,7 @@ runcmd:
   - systemctl disable rpcbind.socket
 
   - cd /
-  - aws s3 cp s3://twink-common/cloudconfig/amazon_files/base.tar.gz /
+  - aws s3 cp s3://twink-lab02/cloudconfig/files/base.tar.gz /
   - tar -zxvf base.tar.gz
   - systemctl restart sshd
   - rm -f base.tar.gz

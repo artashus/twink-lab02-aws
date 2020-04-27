@@ -1,6 +1,6 @@
-resource "aws_security_group" "lab01" {
+resource "aws_security_group" "lab02_web" {
 
-  name = "lab01"
+  name = "lab02_web"
 
   ingress {
     from_port   = "-1"
