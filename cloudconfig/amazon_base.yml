@@ -1,0 +1,37 @@
+#cloud-config
+
+bootcmd:
+  - amazon-linux-extras install epel -y
+
+package_upgrade: true
+
+packages:
+  - mc
+  - htop
+  - iftop
+  - nmon
+
+users:
+  - name: twink
+    passwd: $6$rounds=4096$WZvgYJGTHhafCI$kunX9TJ82uu9gy6izBcD/cBy5IKM33IRpxHOhXtf9fb78So.SFN679XGU9Tmuq75vK0nSOUsbKusQPsZiUG6q.
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAsQet7FpUFuBylm+JrVxhYkQJlUyeuvxHVLEa3cn37CarrhGmhthr5lSE/2QZnICQ1v+9K1pkznHPJoWhQbFBU4CQ1WzBvcSWjzoPeSgMZm+NT6G+TxK+KuINfVKP5PwxkWYRBBkjTDn404HZYeg4eKo0/j1xQ4JwZIVoqyER/qY/Ipj22ANvnXBVP+vFXXwurb9TnsLnzfc+/eckl7+axtdNTl04npOvo5cZ2RN+g9rth8AZY3pPYq5sjjHyBYssnzyNgri4keXC8Req8XyabfaO6hZ9qrbUjXjCc6OG6AAYk8LxCwI99QAHtWUfd8XblF08vjj+2hMDlxSMKiPEVw== 
+    sudo: ALL=(ALL) NOPASSWD:ALL
+
+timezone: Asia/Yerevan
+
+runcmd:
+  - systemctl stop postfix
+  - systemctl disable postfix
+  - systemctl stop rpcbind
+  - systemctl disable rpcbind
+  - systemctl mask rpcbind
+  - systemctl stop rpcbind.socket
+  - systemctl disable rpcbind.socket
+
+  - cd /
+  - aws s3 cp s3://twink-common/cloudconfig/amazon_files/base.tar.gz /
+  - tar -zxvf base.tar.gz
+  - systemctl restart sshd
+  - rm -f base.tar.gz
+  
