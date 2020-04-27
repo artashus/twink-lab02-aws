@@ -29,25 +29,10 @@ resource "aws_s3_bucket_object" "bootstrap_base" {
 
 }
 
-resource "aws_s3_bucket_object" "bootstrap_web" {
+data "aws_s3_bucket_object" "bootstrap_base" {
 
-  bucket                 = aws_s3_bucket.twink_lab02.id
-  content_type           = "text/plain"
-  server_side_encryption = "AES256"
-  key                    = "cloudconfig/web.yml"
-  source                 = "cloudconfig/web.yml"
-  etag                   = filemd5("cloudconfig/web.yml")
-
-}
-
-resource "aws_s3_bucket_object" "bootstrap_db" {
-
-  bucket                 = aws_s3_bucket.twink_lab02.id
-  content_type           = "text/plain"
-  server_side_encryption = "AES256"
-  key                    = "cloudconfig/db.yml"
-  source                 = "cloudconfig/db.yml"
-  etag                   = filemd5("cloudconfig/db.yml")
+  bucket = aws_s3_bucket.twink_lab02.id
+  key    = aws_s3_bucket_object.bootstrap_base.key
 
 }
 
