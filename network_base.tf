@@ -15,7 +15,7 @@ resource "aws_network_acl" "lab02" {
 
   ingress {
     protocol   = "all"
-    rule_no    = 100
+    rule_no    = 9999
     action     = "allow"
     cidr_block = "0.0.0.0/0"
     from_port  = 0
@@ -24,7 +24,7 @@ resource "aws_network_acl" "lab02" {
   
   egress {
     protocol   = "all"
-    rule_no    = 200
+    rule_no    = 9999
     action     = "allow"
     cidr_block = "0.0.0.0/0"
     from_port  = 0
